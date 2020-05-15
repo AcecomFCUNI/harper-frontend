@@ -5,7 +5,9 @@ import { Post } from "../lib/Request"
 
 function* getCurrentArea({ payload: name }) {
   try {
-    const { result } = yield call(Post, "/dataArea", {
+    const {
+      message: { result },
+    } = yield call(Post, "/dataArea", {
       args: {
         type: "getOne",
         data: {

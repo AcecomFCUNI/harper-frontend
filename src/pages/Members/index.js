@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core"
 const useStyles = makeStyles((theme) => ({
   membersContent: {
     width: "100vw",
-    backgroundColor: theme.customColors.upColor,
+    backgroundColor: "#182F49",
     overflowX: "hidden",
   },
 }))

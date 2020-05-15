@@ -5,7 +5,9 @@ import { Post } from "../lib/Request"
 
 function* getMembers() {
   try {
-    const { result } = yield call(Post, "/dataMembers", {
+    const {
+      message: { result },
+    } = yield call(Post, "/dataMembers", {
       args: {
         type: "getAll",
       },

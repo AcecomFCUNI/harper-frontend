@@ -1,6 +1,8 @@
 import axios from "axios"
 
 axios.defaults.baseURL = "https://acecom-harper.herokuapp.com/api"
+axios.defaults.headers.common["Authorization"] =
+  process.env.REACT_APP_AUTH_TOKEN
 
 const Get = async (route, params = {}) => {
   try {

@@ -5,6 +5,14 @@ import InputField from "./components/InputField"
 import { sendEmailRequest } from "../../actions"
 import { useDispatch } from "react-redux"
 
+const initialFormValue = {
+  name: undefined,
+  lastName: undefined,
+  mail: undefined,
+  subject: undefined,
+  message: undefined,
+}
+
 const isEmail = (email) => {
   let regExp = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return regExp.test(String(email).toLocaleLowerCase())
@@ -23,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "30px",
     backgroundColor: "#D3D3D3",
     borderRadius: "8px",
-    width: "70%",
+    width: "700px",
     [theme.breakpoints.down("md")]: {
-      width: "80%",
+      width: "70%",
     },
 
     [theme.breakpoints.down("xs")]: {
@@ -48,13 +56,8 @@ const useStyles = makeStyles((theme) => ({
 const Contact = () => {
   const dispatch = useDispatch()
   const classes = useStyles()
-  const [formData, setFormData] = useState({
-    name: undefined,
-    lastName: undefined,
-    mail: undefined,
-    subject: undefined,
-    message: undefined,
-  })
+  // const [firstLoad, setFirstLoad] = useState(true)
+  const [formData, setFormData] = useState(initialFormValue)
 
   const [nameError, setNameError] = useState({
     error: false,
@@ -132,10 +135,7 @@ const Contact = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.gridcontainer}>
-        <form
-          style={{ overflow: "hidden", textAlign: "center" }}
-          autoComplete='off'
-        >
+        <form style={{ overflow: "hidden", textAlign: "center" }}>
           <InputField
             error={nameError.error}
             errorMessage={nameError.label}
@@ -175,7 +175,7 @@ const Contact = () => {
             onChange={(e) =>
               setFormData({ ...formData, message: e.target.value })
             }
-            label='Déjanos tu mensaje :D'
+            label='Déjanos tu mensaje'
             id='message'
             multiline
             rows={5}
@@ -195,13 +195,7 @@ const Contact = () => {
                 formData.message !== undefined
               ) {
                 dispatch(sendEmailRequest(formData))
-                setFormData({
-                  name: undefined,
-                  lastName: undefined,
-                  mail: undefined,
-                  subject: undefined,
-                  message: undefined,
-                })
+                setFormData(initialFormValue)
               } else alert("Llene correctamente los campos")
             }}
             className={classes.sendButton}

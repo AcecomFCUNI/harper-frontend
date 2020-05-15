@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     fontSize: "45px",
     fontWeight: "bold",
-    color: "#D3D3D3",
+    color: "#D2D2D2",
     textAlign: "center",
     [theme.breakpoints.down("sm")]: {
       fontSize: "5vw !important",
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "5px",
     margin: "24px 0 40px 0",
-    backgroundColor: "#D3D3D3",
+    backgroundColor: "#D2D2D2",
   },
   gridContainer: {
     [theme.breakpoints.down("sm")]: {

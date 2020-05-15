@@ -10,14 +10,16 @@ const InputField = ({
   type = "text",
   label,
   id,
+  value,
   rows = 1,
   multiline = false,
+  onFocus,
   onChange,
   error = false,
   errorMessage = "",
 }) => {
   return (
-    <FormControl fullWidth style={{ marginBottom: "20px" }}>
+    <FormControl required fullWidth style={{ marginBottom: "20px" }}>
       <InputLabel
         error={error}
         style={{ overflow: "hidden" }}
@@ -26,6 +28,8 @@ const InputField = ({
         {label}
       </InputLabel>
       <Input
+        onFocus={onFocus}
+        value={value}
         type={type}
         error={error}
         onChange={onChange}

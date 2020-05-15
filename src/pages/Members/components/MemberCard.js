@@ -16,6 +16,11 @@ const useStyles = makeStyles((theme) => ({
   card: {
     backgroundColor: "transparent",
     margin: `${verticalMarginCard}px ${horizontalMarginCard}px`,
+    transition: ".2s",
+    "&:hover": {
+      // backgroundColor: "#E3E9F9",
+      // boxShadow: "0 0 2px 0 rgb(217, 209, 210), 0 2px 2px 0 rgb(217, 209, 210)",
+    },
   },
   cardContent: {
     padding: `${paddingCard}px !important`,
@@ -23,14 +28,10 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     fontSize: "22px",
-    color: "#FFF",
-    fontWeight: "bold",
+    color: "#D2D2D2",
   },
   photo: {
     display: "block",
-    borderStyle: "solid",
-    borderColor: "#D3D3D3",
-    borderWidth: "5px",
     margin: 0,
     padding: 0,
     width: photoSize,
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   infoContainer: {
-    width: `calc(100% - ${photoSize + 20 + 10}px)`,
+    width: `calc(100% - ${photoSize + 20}px)`,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -71,7 +72,7 @@ export default function MediaCard({ name, photo, git }) {
           </Typography>
           {git !== "" && (
             <Link href={git} target='_blank' style={{ marginTop: "10px" }}>
-              <GitHubIcon style={{ color: "#FFF" }} />
+              <GitHubIcon style={{ color: "#D2D2D2" }} />
             </Link>
           )}
         </div>
