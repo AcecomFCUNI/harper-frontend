@@ -15,7 +15,7 @@ const fullDiv = {
 const useStyles = makeStyles((theme) => ({
   particles: {
     ...fullDiv,
-    background: theme.customColors.gradient,
+    backgroundColor: "#1B2327",
     position: "absolute",
     boxSizing: "border-box",
     zIndex: -1,

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { fetchAreasRequest } from "../../actions"
 
 import ContentCards from "./components/ContentCards"
@@ -8,10 +8,11 @@ import ContentMenuAreas from "./components/ContentMenuAreas"
 
 const Areas = () => {
   const dispatch = useDispatch()
+  const areas = useSelector((state) => state.areas.data)
 
   useEffect(() => {
-    dispatch(fetchAreasRequest())
-  }, [dispatch])
+    if (areas.length === 0) dispatch(fetchAreasRequest())
+  }, [dispatch, areas.length])
 
   return (
     <React.Fragment>

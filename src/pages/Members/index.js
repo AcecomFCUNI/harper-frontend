@@ -1,24 +1,25 @@
 import React, { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { fetchMembersRequest } from "../../actions"
-import ListOfMembers from "./components/ListOfMembers"
+import { useDispatch, useSelector } from "react-redux"
 import { makeStyles } from "@material-ui/core"
 
-const useStyles = makeStyles((theme) => ({
+import ListOfMembers from "./components/ListOfMembers"
+import { fetchMembersRequest } from "../../actions"
+
+const useStyles = makeStyles(() => ({
   membersContent: {
-    width: "100vw",
-    backgroundColor: "#182F49",
-    overflowX: "hidden",
+    display: "block",
+    height: "100%",
   },
 }))
 
 const Members = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const members = useSelector((state) => state.members.data)
 
   useEffect(() => {
-    dispatch(fetchMembersRequest())
-  }, [dispatch])
+    if (members.length === 0) dispatch(fetchMembersRequest())
+  }, [dispatch, members.length])
 
   return (
     <div className={classes.membersContent}>

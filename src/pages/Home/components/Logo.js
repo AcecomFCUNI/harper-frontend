@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
   },
   titleMobile: {
     color: "#FFF",
-    fontWeight: "bold",
+    fontFamily: "Nunito, sans-serif",
+    fontWeight: "700",
     fontSize: "12vw",
     [theme.breakpoints.down("xs")]: {
       fontSize: "15vw",
@@ -28,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
   },
   subtitleMobile: {
     color: "#FFF",
-    fontWeight: "bold",
+    fontFamily: "Nunito, sans-serif",
+    fontWeight: "300",
     fontSize: "3vw",
     [theme.breakpoints.down("xs")]: {
       fontSize: "3.5vw",

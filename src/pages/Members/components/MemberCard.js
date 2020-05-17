@@ -1,55 +1,48 @@
 import React from "react"
-import { makeStyles, Link } from "@material-ui/core"
-import Card from "@material-ui/core/Card"
-import CardContent from "@material-ui/core/CardContent"
-import Typography from "@material-ui/core/Typography"
 import { useDispatch } from "react-redux"
+import {
+  makeStyles,
+  Link,
+  Card,
+  CardContent,
+  Typography,
+} from "@material-ui/core"
 import GitHubIcon from "@material-ui/icons/GitHub"
+
 import { slideMoreInfo } from "../../../actions"
 
-const photoSize = 120
-const verticalMarginCard = 20
-const horizontalMarginCard = 15
+const photoSize = 150
 const paddingCard = 16
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   card: {
-    backgroundColor: "transparent",
-    margin: `${verticalMarginCard}px ${horizontalMarginCard}px`,
-    transition: ".2s",
-    "&:hover": {
-      // backgroundColor: "#E3E9F9",
-      // boxShadow: "0 0 2px 0 rgb(217, 209, 210), 0 2px 2px 0 rgb(217, 209, 210)",
-    },
+    margin: 20,
+    boxShadow: "20px 20px 60px #b8b8b8, -20px -20px 60px #fafafa",
+    backgroundColor: "#d9d9d9",
+    borderRadius: 12,
   },
   cardContent: {
     padding: `${paddingCard}px !important`,
-    display: "flex",
+    height: "auto",
+    maxHeight: "350px",
   },
   name: {
+    marginTop: "10px",
+    padding: "5px",
+    textAlign: "center",
+    fontFamily: "Nunito Sans",
     fontSize: "22px",
-    color: "#D2D2D2",
   },
   photo: {
     display: "block",
-    margin: 0,
-    padding: 0,
     width: photoSize,
     height: photoSize,
+    margin: "10px",
     borderRadius: "50%",
     objectFit: "cover",
-    transition: ".5s",
-    "&:hover": {
-      borderColor: theme.customColors.bottomColor,
-    },
   },
-  infoContainer: {
-    width: `calc(100% - ${photoSize + 20}px)`,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    paddingLeft: "20px",
+  githubIcon: {
+    color: "#222222",
   },
 }))
 
@@ -58,22 +51,37 @@ export default function MediaCard({ name, photo, git }) {
   const classes = useStyles({ photo, name })
 
   return (
-    <Card elevation={0} className={classes.card}>
+    <Card className={classes.card}>
       <CardContent className={classes.cardContent}>
-        <img
-          onClick={() => dispatch(slideMoreInfo())}
-          alt={name}
-          src={photo}
-          className={classes.photo}
-        />
-        <div className={classes.infoContainer}>
-          <Typography variant='h2' className={classes.name}>
-            {name}
-          </Typography>
-          {git !== "" && (
-            <Link href={git} target='_blank' style={{ marginTop: "10px" }}>
-              <GitHubIcon style={{ color: "#D2D2D2" }} />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            onClick={() => dispatch(slideMoreInfo())}
+            alt={name}
+            src={photo}
+            className={classes.photo}
+          />
+        </div>
+        <Typography variant='h3' className={classes.name}>
+          {name}
+        </Typography>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "10px",
+          }}
+        >
+          {git !== "" ? (
+            <Link href={git} target='_blank' rel='noopener noreferrer'>
+              <GitHubIcon className={classes.githubIcon} />
             </Link>
+          ) : (
+            <div style={{ height: 28 }} />
           )}
         </div>
       </CardContent>

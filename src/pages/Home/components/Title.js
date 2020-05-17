@@ -4,15 +4,18 @@ import { makeStyles, Typography, Grid } from "@material-ui/core"
 const useStyles = makeStyles((theme) => ({
   title: {
     color: "#FFF",
-    fontWeight: "bold",
+    fontFamily: "Nunito, sans-serif",
+    fontWeight: "700",
     fontSize: "8.5vw",
     [theme.breakpoints.down("md")]: {
       fontSize: "10vw",
     },
   },
+
   subtitle: {
     color: "#FFF",
-    fontWeight: "bold",
+    fontFamily: "Nunito, sans-serif",
+    fontWeight: "300",
     fontSize: "1.8vw",
     [theme.breakpoints.down("md")]: {
       fontSize: "1.8vw",

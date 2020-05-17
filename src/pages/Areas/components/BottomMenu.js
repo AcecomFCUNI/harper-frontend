@@ -6,7 +6,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite"
 import "./BottomMenu.css"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
-import { fetchOneAreaRequest } from "../../../actions"
+import { getOneArea } from "../../../actions"
 
 const useStyles = makeStyles((theme) => ({
   menu: {
@@ -17,40 +17,35 @@ const useStyles = makeStyles((theme) => ({
     width: "100vw",
   },
   menuButton: {
-    overflow: "hidden",
+    fontFamily: "Nunito Sans",
   },
 }))
 
-const getArea = (code) => {
+const getAbbrAndIcon = (code) => {
   switch (code) {
     case 1:
       return {
         label: "IA",
-        value: "ai",
         icon: <FavoriteIcon />,
       }
     case 2:
       return {
         label: "DW",
-        value: "wd",
         icon: <FavoriteIcon />,
       }
     case 3:
       return {
         label: "SI",
-        value: "is",
         icon: <FavoriteIcon />,
       }
     case 4:
       return {
         label: "DV",
-        value: "vd",
         icon: <FavoriteIcon />,
       }
     default:
       return {
         label: "NV",
-        value: "no_val",
         icon: <FavoriteIcon />,
       }
   }
@@ -59,32 +54,30 @@ const getArea = (code) => {
 const BottomMenu = () => {
   const dispatch = useDispatch()
   const classes = useStyles()
-  const {
-    areas: { data },
-    currentArea: { name },
-  } = useSelector((state) => state)
-  const [value, setValue] = React.useState("ai")
-  const [areaName, setAreaName] = useState(name)
+  const { data } = useSelector((state) => state.areas)
+  const [value, setValue] = useState("Inteligencia Artificial")
 
   useEffect(() => {
-    dispatch(fetchOneAreaRequest(areaName))
-  }, [dispatch, areaName])
+    dispatch(getOneArea(value))
+  }, [dispatch, value])
 
   return (
     <BottomNavigation
+      showLabels
       value={value}
-      onChange={(e, newValue) => setValue(newValue)}
+      onChange={(e, value) => {
+        setValue(value)
+      }}
       className={classes.menu}
     >
       {data.map(({ code, name }) => {
-        const { label, value, icon } = getArea(code)
+        const { label, icon } = getAbbrAndIcon(code)
         return (
           <BottomNavigationAction
-            onClick={() => setAreaName(name)}
             className={classes.menuButton}
             key={label}
             label={label}
-            value={value}
+            value={name}
             icon={icon}
           />
         )

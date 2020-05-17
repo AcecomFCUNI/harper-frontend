@@ -30,8 +30,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "2vw 0",
   },
   titleFont: {
+    fontFamily: "Nunito Sans",
     color: "#FFF",
-    fontWeight: "bold",
+    fontWeight: 600,
     fontSize: "2.5vw",
     textAlign: "end",
   },
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "2vw",
   },
   subtitleFont: {
+    fontFamily: "Nunito Sans",
     color: "#FFF",
     fontSize: "1.3vw",
     textAlign: "end",
@@ -52,9 +54,10 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "2vw",
   },
   showMoreButton: {
+    fontWeight: 600,
+    fontFamily: "Nunito Sans",
     width: "200px",
     color: "#FFF",
-    fontWeight: "bold",
     backgroundColor: "#2F2F30",
     "&:hover": {
       backgroundColor: "#303030",

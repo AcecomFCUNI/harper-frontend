@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 300,
     top: 0,
     right: 0,
-    marginRight: "15px",
-    marginTop: "15px",
+    marginRight: "10px",
+    marginTop: "35px",
     "&:hover": {
       backgroundColor: theme.fab.hoverColor,
     },

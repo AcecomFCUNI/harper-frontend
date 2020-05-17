@@ -1,6 +1,5 @@
 import {
   FETCH_AREAS,
-  FETCH_ONE_AREA,
   FETCH_MEMBERS,
   HANDLE_MENU_MOBILE,
   SLIDE_MORE_INFO,
@@ -27,24 +26,10 @@ export const fetchAreasFail = (error) => {
   }
 }
 
-export const fetchOneAreaRequest = (name) => {
+export const getOneArea = (name) => {
   return {
-    type: FETCH_ONE_AREA.REQUEST,
+    type: FETCH_AREAS.GET_ONE_AREA,
     payload: name,
-  }
-}
-
-export const fetchOneAreaSuccess = (area) => {
-  return {
-    type: FETCH_ONE_AREA.SUCCESS,
-    payload: area,
-  }
-}
-
-export const fetchOneAreaFail = (error) => {
-  return {
-    type: FETCH_ONE_AREA.FAIL,
-    payload: error,
   }
 }
 

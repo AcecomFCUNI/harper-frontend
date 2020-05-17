@@ -1,74 +1,55 @@
 import React from "react"
 import MemberCard from "./MemberCard"
 import { useSelector } from "react-redux"
-import {
-  Grid,
-  makeStyles,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@material-ui/core"
+import { makeStyles } from "@material-ui/core"
 import Loader from "../../../components/Loader"
 
-const sliceArr = (members, numberOfItemsPerRow) => {
-  let newArr = []
-  let regularMembers = members.filter(
-    ({ status }) => status !== "Junta Directiva"
-  )
-  for (let i = 0; i < regularMembers.length; i += numberOfItemsPerRow) {
-    if (i + numberOfItemsPerRow - 1 < regularMembers.length)
-      newArr.push(regularMembers.slice(i, i + numberOfItemsPerRow))
-    else newArr.push(regularMembers.slice(i, regularMembers.length))
-  }
-  return newArr
-}
-
 const useStyles = makeStyles((theme) => ({
-  marginWrapper: {
-    padding: "30px 0",
-  },
   wrapper: {
-    position: "relative",
-    left: "50%",
-    transform: "translate(-50%)",
-    width: ({ wrapperWidth }) => wrapperWidth,
-    transition: "1s",
+    backgroundColor: "#D9D9D9",
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    paddingBottom: "50px",
+  },
+  content: {
+    width: "1200px",
+    [theme.breakpoints.down("md")]: {
+      width: "850px",
+    },
     [theme.breakpoints.down("sm")]: {
-      width: "600px !important",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
+      width: "500px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "95%",
     },
     [theme.breakpoints.down("xs")]: {
-      width: "360px !important",
+      width: "90%",
     },
   },
   title: {
-    width: "100%",
-    fontSize: "45px",
-    fontWeight: "bold",
-    color: "#D2D2D2",
-    textAlign: "center",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "5vw !important",
-    },
+    position: "relative",
+    zIndex: 100,
+    fontFamily: "Nunito Sans",
+    fontWeight: "600",
+    fontSize: "60px",
+    color: "#222222",
+    padding: "100px 0 30px 0",
+    borderBottom: "5px solid #222222",
     [theme.breakpoints.down("xs")]: {
-      fontSize: "8vw !important",
+      fontSize: "10vw",
     },
   },
-  divider: {
-    width: "100%",
-    height: "5px",
-    margin: "24px 0 40px 0",
-    backgroundColor: "#D2D2D2",
-  },
-  gridContainer: {
-    [theme.breakpoints.down("sm")]: {
-      width: "500px !important",
+  grid: {
+    marginTop: "30px",
+    display: "grid",
+    gridGap: "10px",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    [theme.breakpoints.down("md")]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
     },
     [theme.breakpoints.down("xs")]: {
-      width: "360px !important",
+      gridTemplateColumns: "1fr",
     },
   },
 }))
@@ -77,82 +58,32 @@ const ListOfMembers = () => {
   const {
     members: { loading, data: members },
   } = useSelector((state) => state)
-  const theme = useTheme()
-  const lessThan1300px = useMediaQuery("(min-width:1300px)")
-  const sm = useMediaQuery(theme.breakpoints.down("sm"))
-
-  let numberOfItemsPerRow
-  let wrapperWidth
-
-  if (!lessThan1300px) {
-    numberOfItemsPerRow = 2
-    wrapperWidth = 800
-  } else {
-    numberOfItemsPerRow = 3
-    wrapperWidth = 1200
-  }
-
-  const classes = useStyles({ numberOfItemsPerRow, wrapperWidth })
+  const classes = useStyles()
 
   return loading ? (
     <Loader />
   ) : (
     <React.Fragment>
-      <div
-        style={{
-          width: "100%",
-          height: "64px",
-        }}
-      />
-      <div className={classes.marginWrapper}>
-        <div className={classes.wrapper}>
-          <Typography variant='h2' className={classes.title}>
-            Nuestra Junta Directiva
-          </Typography>
-          <Grid container justify='center' className={classes.gridContainer}>
-            {sm
-              ? members.map(({ name, photo, git, status }) =>
-                  status === "Junta Directiva" ? (
-                    <Grid key={name} item xs={12} style={{ width: "400px" }}>
-                      <MemberCard name={name} photo={photo} git={git} />
-                    </Grid>
-                  ) : null
+      <div className={classes.wrapper}>
+        <div className={classes.content}>
+          <div className={classes.title}>Junta Directiva</div>
+          <div className={classes.grid}>
+            {members.map(
+              ({ name, photo, git, status }) =>
+                status === "Junta Directiva" && (
+                  <MemberCard key={name} name={name} photo={photo} git={git} />
                 )
-              : members.map(({ name, photo, git, status }) =>
-                  status === "Junta Directiva" ? (
-                    <Grid key={name} item xs={12 / numberOfItemsPerRow}>
-                      <MemberCard name={name} photo={photo} git={git} />
-                    </Grid>
-                  ) : null
-                )}
-
-            <div className={classes.divider} />
-            <Typography variant='h2' className={classes.title}>
-              Nuestros Miembros
-            </Typography>
-            {sm
-              ? members.map(({ name, photo, git, status }) =>
-                  status !== "Junta Directiva" ? (
-                    <Grid key={name} item xs={12}>
-                      <MemberCard name={name} photo={photo} git={git} />
-                    </Grid>
-                  ) : null
+            )}
+          </div>
+          <div className={classes.title}>Miembros</div>
+          <div className={classes.grid}>
+            {members.map(
+              ({ name, photo, git, status }) =>
+                status !== "Junta Directiva" && (
+                  <MemberCard key={name} name={name} photo={photo} git={git} />
                 )
-              : sliceArr(members, numberOfItemsPerRow).map((subArr, index) => (
-                  <Grid
-                    key={index}
-                    style={{ width: `${400 * subArr.length}px` }}
-                    item
-                    container
-                  >
-                    {subArr.map(({ name, photo, git }) => (
-                      <Grid key={name} item xs={12 / subArr.length}>
-                        <MemberCard name={name} photo={photo} git={git} />
-                      </Grid>
-                    ))}
-                  </Grid>
-                ))}
-          </Grid>
+            )}
+          </div>
         </div>
       </div>
     </React.Fragment>

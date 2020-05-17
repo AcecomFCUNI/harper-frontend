@@ -1,11 +1,12 @@
 import React from "react"
-import { makeStyles } from "@material-ui/core"
+import { makeStyles, AppBar } from "@material-ui/core"
 import FabMobile from "./FabMobile"
 import FadeMenu from "./FadeMenu.js"
+import InformativeBanner from "../../components/InformativeBanner"
 
 const useStyles = makeStyles(() => ({
   content: {
-    position: "absolute",
+    position: "relative",
     zIndex: 100,
   },
 }))
@@ -15,9 +16,14 @@ const MobileLayout = ({ children }) => {
 
   return (
     <React.Fragment>
-      <div className={classes.content}>{children}</div>
       <FadeMenu />
       <FabMobile />
+      <div className={classes.content}>
+        <AppBar position='fixed' className={classes.appbar}>
+          <InformativeBanner />
+        </AppBar>
+        {children}
+      </div>
     </React.Fragment>
   )
 }
