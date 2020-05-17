@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import BottomNavigation from "@material-ui/core/BottomNavigation"
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
-import FavoriteIcon from "@material-ui/icons/Favorite"
-import "./BottomMenu.css"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { makeStyles, BottomNavigation, BottomNavigationAction } from "@material-ui/core"
+
+import NotInterestedRoundedIcon from '@material-ui/icons/NotInterestedRounded'
+import GamepadRoundedIcon from '@material-ui/icons/GamepadRounded'
+import SecurityRoundedIcon from '@material-ui/icons/SecurityRounded'
+import CodeRoundedIcon from '@material-ui/icons/CodeRounded'
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { getOneArea } from "../../../actions"
+import "./BottomMenu.css"
 
 const useStyles = makeStyles((theme) => ({
   menu: {
@@ -26,27 +28,27 @@ const getAbbrAndIcon = (code) => {
     case 1:
       return {
         label: "IA",
-        icon: <FavoriteIcon />,
+      icon: <FavoriteIcon />,
       }
     case 2:
       return {
         label: "DW",
-        icon: <FavoriteIcon />,
+        icon: <CodeRoundedIcon />,
       }
     case 3:
       return {
         label: "SI",
-        icon: <FavoriteIcon />,
+        icon: <SecurityRoundedIcon />,
       }
     case 4:
       return {
         label: "DV",
-        icon: <FavoriteIcon />,
+        icon: <GamepadRoundedIcon />,
       }
     default:
       return {
         label: "NV",
-        icon: <FavoriteIcon />,
+        icon: <NotInterestedRoundedIcon />,
       }
   }
 }
