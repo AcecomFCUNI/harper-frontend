@@ -7,7 +7,7 @@ function* getMembers() {
   try {
     const {
       message: { result },
-    } = yield call(Post, "/dataMembers", {
+    } = yield call(Post, "/members", {
       args: {
         type: "getAll",
       },

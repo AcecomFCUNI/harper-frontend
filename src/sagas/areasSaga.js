@@ -7,7 +7,7 @@ function* getAreas() {
   try {
     const {
       message: { result },
-    } = yield call(Post, "/dataArea", {
+    } = yield call(Post, "/areas", {
       args: {
         type: "getAll",
       },
