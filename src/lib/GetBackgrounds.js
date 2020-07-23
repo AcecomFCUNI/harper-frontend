@@ -1,6 +1,4 @@
-import notFound from "../static/images/backgroundAreas/not_found.png"
-
-const getBackgroundImg = (name) => {
+const getBackgroundColor = (name) => {
   switch (name) {
     case "Inteligencia Artificial":
       return "#607d8b"
@@ -11,8 +9,8 @@ const getBackgroundImg = (name) => {
     case "Desarrollo de Videojuegos":
       return "#37474f"
     default:
-      return notFound
+      return "#374a5d"
   }
 }
 
-export default getBackgroundImg
+export default getBackgroundColor
