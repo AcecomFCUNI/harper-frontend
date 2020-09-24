@@ -4,7 +4,6 @@ import { useHistory, useLocation } from "react-router-dom"
 import { AppBar, Toolbar, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
-import InformativeBanner from "../../../components/InformativeBanner"
 import routes from "../../../routes"
 
 const navbarHeight = 40
@@ -50,7 +49,6 @@ const Navbar = () => {
   return (
     <React.Fragment>
       <AppBar position='fixed' className={classes.appbar}>
-        <InformativeBanner />
         <Toolbar className={classes.toolbar}>
           {routes.map(({ label, path }) => (
             <Button
